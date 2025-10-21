@@ -23,5 +23,7 @@ namespace MovieApi.Domain.Entites
         public String CreatedYear { get; set; }
 
         public bool Status { get; set; }
+
+        
     }
 }

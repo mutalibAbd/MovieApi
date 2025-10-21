@@ -11,5 +11,7 @@ namespace MovieApi.Domain.Entites
         public int CatagoryId { get; set; }
 
         public string CatagoryName { get; set; }
+
+        
     }
 }

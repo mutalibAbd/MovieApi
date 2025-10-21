@@ -18,7 +18,7 @@ namespace MovieApi.Aplication.Features.CQRSDesignPattern.Handlers.CatagoryHandle
             _context = context; // Bağlamı sınıfın özel alanına atar
         }
 
-        public async void Handle (AddCatagoryCommand command) // Catagory ekleme işlemini gerçekleştirir
+        public async Task Handle (AddCatagoryCommand command) // Catagory ekleme işlemini gerçekleştirir
         {
             _context.Categories.Add(new Catagory
             {

@@ -17,7 +17,7 @@ namespace MovieApi.Aplication.Features.CQRSDesignPattern.Handlers.CatagoryHandle
             _context = context; // Bağlamı sınıfın özel alanına atar
         }
 
-        public async void Hanlde(RemoveCatagoryCommand command)
+        public async Task Hanlder(RemoveCatagoryCommand command)
         {
             var value = await _context.Categories.FindAsync(command.CatagoryId); 
             // Komuttan gelen kategori id sini kullanarak silme islemi yapar

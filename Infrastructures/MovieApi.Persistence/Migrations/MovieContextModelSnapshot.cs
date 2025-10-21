@@ -82,6 +82,9 @@ namespace MovieApi.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovieId"));
 
+                    b.Property<int?>("CatagoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CoverimageURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -98,7 +101,8 @@ namespace MovieApi.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
@@ -111,6 +115,8 @@ namespace MovieApi.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MovieId");
+
+                    b.HasIndex("CatagoryId");
 
                     b.ToTable("Movies");
                 });
@@ -156,6 +162,21 @@ namespace MovieApi.Persistence.Migrations
                     b.HasKey("TagId");
 
                     b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("MovieApi.Domain.Entites.Movie", b =>
+                {
+                    b.HasOne("MovieApi.Domain.Entites.Catagory", "catagory")
+                        .WithMany("Movies")
+                        .HasForeignKey("CatagoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("catagory");
+                });
+
+            modelBuilder.Entity("MovieApi.Domain.Entites.Catagory", b =>
+                {
+                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }

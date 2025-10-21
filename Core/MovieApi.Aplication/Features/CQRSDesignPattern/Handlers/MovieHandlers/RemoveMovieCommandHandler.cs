@@ -1,4 +1,5 @@
 ﻿using MovieApi.Aplication.Features.CQRSDesignPattern.Commands.CatagoryCommands;
+using MovieApi.Aplication.Features.CQRSDesignPattern.Commands.MovieCommands;
 using MovieApi.Persistence.Context;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace MovieApi.Aplication.Features.CQRSDesignPattern.Handlers.MovieHandlers
             _context = context;
         }
 
-        public async void Handle (RemoveCatagoryCommand command)
+        public async Task Handle (RemoveMovieCommands command)
         {
-            var value = await _context.Movies.FindAsync(command.CatagoryId);
+            var value = await _context.Movies.FindAsync(command.MovieId);
             _context.Movies.Remove(value);
             await _context.SaveChangesAsync();
         }

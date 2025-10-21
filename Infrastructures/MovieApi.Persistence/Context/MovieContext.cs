@@ -24,5 +24,7 @@ namespace MovieApi.Persistence.Context
         public DbSet<Review> Reviews { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
+
+        
     }
 }
