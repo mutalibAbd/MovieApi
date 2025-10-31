@@ -2,7 +2,9 @@ using Microsoft.OpenApi.Models;
 using MovieApi.Aplication.Features.CQRSDesignPattern.Commands.MovieCommands;
 using MovieApi.Aplication.Features.CQRSDesignPattern.Handlers.CatagoryHandlers;
 using MovieApi.Aplication.Features.CQRSDesignPattern.Handlers.MovieHandlers;
+using MovieApi.Aplication.Features.MediatorDesignPattern.Handlers.TagHandlers;
 using MovieApi.Persistence.Context;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,17 @@ builder.Services.AddScoped<GetMovieByIdQueryHandlers>();
 builder.Services.AddScoped<UpdateMoviecommandHandler>();
 builder.Services.AddScoped<RemoveMovieCommandHandler>();
 builder.Services.AddScoped<CreatMovieCommandHandleer>();
+
+//Cast ve Tags ucun medaitr isleddik ve asagida onlar ucun serviceler yazilib:
+//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTagQueryHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetTagByIdQueryHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateTagCommandHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(UpdateTagCommandHandler).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(RemoveTagCommandQueryHandler).Assembly));
+
+
 
 
 builder.Services.AddControllers();
